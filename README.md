@@ -1,10 +1,10 @@
 # d3.simple.chart
 
-## About
+### About
 Very small and easy for quick creation of simple line charts on d3.js.
 
-## How to use
-### Step 1. Load and prepare data
+### How to use
+#### Step 1. Load and prepare data
 ```js
     d3.tsv("sample.tsv", function(error, data) {
       if (error) throw error;
@@ -13,7 +13,7 @@ Very small and easy for quick creation of simple line charts on d3.js.
       ...
     }
 ```
-### Step 2. Init param
+#### Step 2. Init param
 ```js
       //initialize params of the chart
       var param = {
@@ -35,13 +35,13 @@ Very small and easy for quick creation of simple line charts on d3.js.
         ]
       };
 ```
-### Step 3. Create chart
+#### Step 3. Create chart
 ```js
       // build chart
       d3sChart(param,data,dataGroup);
 ```
-## Example of chart
+### Example of chart
 ![Example of chart](https://cloud.githubusercontent.com/assets/20028214/16200289/8118c198-372e-11e6-89b5-da5072c648da.png)
 
-## Licence
+### Licence
 BSD.
