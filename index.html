@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>D3 simple example</title>
+    <style>
+    .axis2 path,
+    .axis2 line,
+    .axis path,
+    .axis line {
+        fill: none;
+        stroke: black;
+        shape-rendering: crispEdges;
+    }
+
+    .axis text {
+        font-family: sans-serif;
+        font-size: 11px;
+    }
+
+    .axis2 text {
+        font-family: sans-serif;
+        font-size: 10px;
+    }
+
+    .legend text {
+        font-family: sans-serif;
+        font-size: 11px;
+    }
+    </style>
+    <script type="text/javascript" src="//d3js.org/d3.v3.min.js"></script>
+    <script  type="text/javascript" src="d3.simple.chart.js"></script> 
+    <link rel="stylesheet" href="d3.simple.chart.css">
+  </head>
+  <body>
+  <TABLE><TR><TD><div id="chart1"></div></TD></TR></TABLE>
+  <script>
+    d3.tsv("sample.tsv", function(error, data) {
+      if (error) throw error;
+
+      // parse date and numeric data before build chart
+      preParceDann("Date","%d.%m.%Y",["Metal month","Mined %"],data);
+
+      //rearrange the data for output on the chart categories
+      var dataGroup = d3.nest()
+          .key(function(d) { return d.Category; })
+          .entries(data);
+
+      //initialize params of the chart
+      var param = {
+        parentSelector: "#chart1",
+        width: 600,
+        height: 300,
+        title: "Iron mine work",
+        xColumn: "Date",
+        xColumnDate: true,
+        yLeftAxisName: "Tonnes",
+        yRightAxisName: "%",
+        categories: [
+          {name: "plan", width: "1px"},
+          {name: "fact", width: "2px"}
+        ],
+        series: [
+          {yColumn: "Metal month", color: "#ff6600", yAxis: "left"},
+          {yColumn: "Mined %", color: "#0080ff", yAxis: "right"}
+        ]
+      };
+
+      // build chart
+      d3sChart(param,data,dataGroup);
+    });
+  </script> 
+  </body>
+</html> 
