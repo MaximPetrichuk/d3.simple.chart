@@ -1,7 +1,7 @@
 # d3.simple.chart
 
 ### About
-Very small and easy for quick creation of simple line charts on d3.js.
+Very small and easy library for quick creation of simple line charts on d3.js.
 
 ### How to use
 #### Step 1. Load and prepare data
