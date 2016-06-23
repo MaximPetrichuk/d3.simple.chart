@@ -29,10 +29,12 @@
     }
     </style>
     <script type="text/javascript" src="//d3js.org/d3.v3.min.js"></script>
-    <script  type="text/javascript" src="d3.simple.chart.js"></script> 
+    <script type="text/javascript" src="d3.simple.chart.js"></script> 
   </head>
   <body>
-  <TABLE><TR><TD><div id="chart1"></div></TD></TR></TABLE>
+  <TABLE><TR><TD><div id="chart1"></div></TD></TR>
+    <TR><TD><div id="chart2"></div></TD></TR></TABLE>
+
   <script>
     d3.tsv("sample.tsv", function(error, data) {
       if (error) throw error;
@@ -41,11 +43,12 @@
       preParceDann("Date","%d.%m.%Y",["Metal month","Mined %"],data);
 
       //rearrange the data for output on the chart categories
+      //if the categories is not necessary that the step can not perform
       var dataGroup = d3.nest()
           .key(function(d) { return d.Category; })
           .entries(data);
 
-      //initialize params of the chart
+      //initialize params of the chart with categories
       var param = {
         parentSelector: "#chart1",
         width: 600,
@@ -55,7 +58,7 @@
         xColumnDate: true,
         yLeftAxisName: "Tonnes",
         yRightAxisName: "%",
-        categories: [
+        categories: [ 
           {name: "plan", width: "1px"},
           {name: "fact", width: "2px"}
         ],
@@ -65,8 +68,27 @@
         ]
       };
 
-      // build chart
+      // build chart with categories
       d3sChart(param,data,dataGroup);
+
+        //initialize params of the chart without categories
+      var param2 = {
+        parentSelector: "#chart1",
+        width: 600,
+        height: 300,
+        title: "Iron mine work",
+        xColumn: "Date",
+        xColumnDate: true,
+        yLeftAxisName: "Tonnes",
+        yRightAxisName: "%",
+        series: [
+          {yColumn: "Metal month", color: "#ff6600", yAxis: "left"},
+          {yColumn: "Mined %", color: "#0080ff", yAxis: "right"}
+        ]
+      };
+
+      // build chart without categories
+      d3sChart(param2,data);    
     });
   </script> 
   </body>
