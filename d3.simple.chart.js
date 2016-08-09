@@ -42,6 +42,8 @@ function d3sChart (param,data,dataGroup){
   if (selectedObj.empty()) {
       throw "The '" + param.parentSelector + "' selector did not match any elements.  Please prefix with '#' to select by id or '.' to select by class";
   };
+  //remove previous chart
+  d3.select(param.parentSelector+"_d3_simple_chart").remove();
 
   var buildCategory = true;
   if (param.categories === undefined || dataGroup === undefined) {buildCategory = false;};
@@ -96,7 +98,7 @@ function d3sChart (param,data,dataGroup){
 
   // create svg for draving chart
   var svg = selectedObj.append("svg")
-      .attr({width: param.width, height: param.height});
+      .attr({width: param.width, height: param.height, id: param.parentSelector.substr(1)+"_d3_simple_chart"});
 
   // outer border
   svg.append("rect").attr({width: param.width, height: param.height})
