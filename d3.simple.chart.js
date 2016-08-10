@@ -91,7 +91,7 @@ function d3sChart (param,data,dataGroup){
                 .ticks(d3.timeMonth,xqViewMonth).tickFormat(function(d) { var a = monthNameFormat(d); if (a == "01") {a = ""}; return a;})
                 .tickSize(2);
   } else {
-    var xAxis = d3.axis().scale(xScale).orient("bottom");
+    var xAxis = d3.axisBottom(xScale);
   };
   var yAxisLeft = d3.axisLeft(yScaleLeft);
   var yAxisRight = d3.axisRight(yScaleRight);
