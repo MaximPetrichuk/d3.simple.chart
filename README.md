@@ -23,6 +23,7 @@ Very small and easy library for quick creation of simple line charts on d3.js.
         title: "Iron mine work",
         xColumn: "Date",
         xColumnDate: true,
+        xAxisName: "Date work",
         yLeftAxisName: "Tonnes",
         yRightAxisName: "%",
         categories: [
@@ -30,8 +31,8 @@ Very small and easy library for quick creation of simple line charts on d3.js.
           {name: "fact", width: "2px"}
         ],
         series: [
-          {yColumn: "Metal month", color: "#ff6600", yAxis: "left"},
-          {yColumn: "Mined %", color: "#0080ff", yAxis: "right"}
+          {yColumn: "Metal month", title: "Metal in moth", color: "#ff6600", yAxis: "left"},
+          {yColumn: "Mined %", title: "Mined proc.", color: "#0080ff", yAxis: "right"}
         ]
       };
 ```
