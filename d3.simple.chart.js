@@ -1,8 +1,8 @@
 /*
  * d3.simple.chart
  * @author Maxim Petrichuk
- * @version 0.2.0
- * @date Aug 10th, 2016
+ * @version 0.2.1
+ * @date Aug 11th, 2016
  * @repo https://github.com/MaximPetrichuk/d3.simple.chart
 
 
@@ -14,6 +14,7 @@
     title: "Iron mine work",
     xColumn: "Date",
     xColumnDate: true,
+    xAxisName: "Date work",
     yLeftAxisName: "Tonnes",
     yRightAxisName: "%",
     categories: [
@@ -21,8 +22,8 @@
       {name: "fact", width: "2px"}
     ],
     series: [
-      {yColumn: "Metal month", color: "#ff6600", yAxis: "left"},
-      {yColumn: "Mined %", color: "#0080ff", yAxis: "right"}
+      {yColumn: "Metal month", title: "Metal in moth", color: "#ff6600", yAxis: "left"},
+      {yColumn: "Mined %", title: "Mined proc.", color: "#0080ff", yAxis: "right"}
     ]
   };
 
@@ -106,34 +107,36 @@ function d3sChart (param,data,dataGroup){
                     .style("fill", "none").style("stroke", "#ccc");
 
   // create group in svg for generate graph
-  var g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+  var g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+                          .attr("class", "legend");
 
-  // add title
+  // add title and axis names
   g.append("text").attr("x", margin.left) .attr("y", 0 - (margin.top / 2))
         .attr("text-anchor", "middle").style("font-size", "14px") 
         .text(param.title);
+  g.append("text").attr("x", width-43).attr("dx", 40) .attr("y", height-4 )
+        .attr("text-anchor", "end") 
+        .text(param.xAxisName);
+  g.append("text").attr("transform", "rotate(-90)")
+        .attr("x", 0) .attr("y", -28).attr("dy", 40)
+        .attr("text-anchor", "end") 
+        .text(param.yLeftAxisName);
+  g.append("text").attr("transform", "rotate(-90)")
+        .attr("x", 0) .attr("y", width-44).attr("dy", 40)
+        .attr("text-anchor", "end") 
+        .text(param.yRightAxisName);
 
-  // add axis and axis names
+  // add axis
   g.append("g").attr("class", "x axis").attr("transform", "translate(0," + height + ")")
-    .call(xAxis)
-    .append("text")
-      .attr("x", width-20).attr("dx", ".71em")
-      .attr("y", -4).style("text-anchor", "end")
-      .text(param.xColumn);
+    .call(xAxis);
   if (param.xColumnDate) {
     g.append("g").attr("class", "x axis2").attr("transform", "translate(0," + height + ")")
       .call(xAxis2);
   };
   g.append("g").attr("class", "y axis")
     .call(yAxisLeft)
-    .append("text").attr("transform", "rotate(-90)")
-      .attr("y", 6).attr("dy", ".71em").style("text-anchor", "end")
-      .text(param.yLeftAxisName);
   g.append("g").attr("class", "y axis").attr("transform", "translate(" + width + " ,0)")
     .call(yAxisRight)
-    .append("text").attr("transform", "rotate(-90)")
-      .attr("y", -14).attr("dy", ".71em").style("text-anchor", "end")
-      .text(param.yRightAxisName);
 
   if (buildCategory) { 
    // draw chart lines for each categories and series in param
@@ -195,7 +198,7 @@ function d3sChart (param,data,dataGroup){
       
     legend.selectAll('text').data(param.series).enter()
       .append("text").attr("y", 0 - (margin.top / 2)+10).attr("x", function(d, i){ return i *  90 + 11;})
-      .text(function(d) { return d.yColumn; });
+      .text(function(d) { return d.title; });
 
   if (buildCategory) { // add legend for categories
     var legend1 = svg.append("g").attr("class", "legend").attr("height", 40).attr("width", 200)
