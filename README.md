@@ -18,8 +18,8 @@ Very small and easy library for quick creation of simple line charts on d3.js.
       //initialize params of the chart
       var param = {
         parentSelector: "#chart1",
-        width: 600,
-        height: 300,
+        width: 600,  // if 0 then get parent width
+        height: 300, // if 0 then get parent height
         title: "Iron mine work",
         xColumn: "Date",
         xColumnDate: true,
