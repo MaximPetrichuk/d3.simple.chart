@@ -1,7 +1,7 @@
 /*
  * d3.simple.chart
  * @author Maxim Petrichuk
- * @version 0.2.2
+ * @version 0.2.3
  * @date Aug 16th, 2016
  * @repo https://github.com/MaximPetrichuk/d3.simple.chart
 
@@ -9,8 +9,8 @@
   //sample param
   var param = {
     parentSelector: "#chart1",
-    width: 600,
-    height: 300,
+    width: 600,  // if 0 then get parent width
+    height: 300, // if 0 then get parent height
     title: "Iron mine work",
     xColumn: "Date",
     xColumnDate: true,
@@ -49,6 +49,9 @@ function d3sChart (param,data,dataGroup){
   var buildCategory = true;
   if (param.categories === undefined || dataGroup === undefined) {buildCategory = false;};
 
+  if (param.width == 0) {param.width = parseInt(selectedObj.style('width'), 10);};
+  if (param.height == 0) {param.height = parseInt(selectedObj.style('height'), 10);};
+  
   var margin = {top: 30, right: 40, bottom: 30, left: 50},
       width = param.width - margin.left - margin.right,
       height = param.height - margin.top - margin.bottom;
