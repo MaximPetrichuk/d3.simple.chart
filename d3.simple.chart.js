@@ -1,8 +1,8 @@
 /*
  * d3.simple.chart
  * @author Maxim Petrichuk
- * @version 0.2.1
- * @date Aug 11th, 2016
+ * @version 0.2.2
+ * @date Aug 16th, 2016
  * @repo https://github.com/MaximPetrichuk/d3.simple.chart
 
 
@@ -189,7 +189,7 @@ function d3sChart (param,data,dataGroup){
 
   // add legend for seies  
   var legend = svg.append("g").attr("class", "legend").attr("height", 40).attr("width", 200)
-    .attr("transform", "translate(180,20)");   
+    .attr("transform",(param.title == "") ? "translate(20,20)" : "translate(180,20)");   
 
     legend.selectAll('rect').data(param.series).enter()
       .append("rect").attr("y", 0 - (margin.top / 2)).attr("x", function(d, i){ return i *  90;})
@@ -202,7 +202,7 @@ function d3sChart (param,data,dataGroup){
 
   if (buildCategory) { // add legend for categories
     var legend1 = svg.append("g").attr("class", "legend").attr("height", 40).attr("width", 200)
-      .attr("transform", "translate(350,20)");   
+      .attr("transform",(param.title == "") ? "translate(220,20)" : "translate(350,20)");   
 
       legend1.selectAll('line').data(param.categories).enter()
         .append("line").attr("y1", 0 - (margin.top / 2)+5).attr("x1", function(d, i){ return i *  60;})
