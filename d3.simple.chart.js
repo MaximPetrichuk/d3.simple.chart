@@ -1,8 +1,8 @@
 /*
  * d3.simple.chart
  * @author Maxim Petrichuk
- * @version 0.2.3
- * @date Aug 16th, 2016
+ * @version 0.2.4
+ * @date Aug 20th, 2016
  * @repo https://github.com/MaximPetrichuk/d3.simple.chart
 
 
@@ -147,18 +147,10 @@ function d3sChart (param,data,dataGroup){
       for (var i = 0, len = param.categories.length; i < len; i += 1) {
         if (param.categories[i].name == d.key){
           for (var j = 0, len1 = param.series.length; j < len1; j += 1) {
-            if (param.series[j].yAxis == "left"){
-              // init line for left axis
-              var line = d3.line()
-                .x(function(d) { return xScale(d[param.xColumn]); })
-                .y(function(d) { return yScaleLeft(d[param.series[j].yColumn] ); });
-            };
-            if (param.series[j].yAxis == "right"){
-              // init line for right axis
-              var line = d3.line()
-                .x(function(d) { return xScale(d[param.xColumn]); })
-                .y(function(d) { return yScaleRight(d[param.series[j].yColumn] ); });
-            };
+            // init line for axis
+            var line = d3.line()
+              .x(function(data) { return xScale(data[param.xColumn]); })
+              .y(function(data) { return (param.series[j].yAxis == "left") ? yScaleLeft(data[param.series[j].yColumn]) : yScaleRight(data[param.series[j].yColumn]); });
             // draw line
             g.append("path").datum(d.values)
               .attr("d", line) 
@@ -170,18 +162,10 @@ function d3sChart (param,data,dataGroup){
     });
   } else {
     for (var j = 0, len1 = param.series.length; j < len1; j += 1) {
-      if (param.series[j].yAxis == "left"){
-        // init line for left axis
-        var line = d3.line()
-          .x(function(data) { return xScale(data[param.xColumn]); })
-          .y(function(data) { return yScaleLeft(data[param.series[j].yColumn] ); });
-      };
-      if (param.series[j].yAxis == "right"){
-        // init line for right axis
-        var line = d3.line()
-          .x(function(data) { return xScale(data[param.xColumn]); })
-          .y(function(data) { return yScaleRight(data[param.series[j].yColumn] ); });
-      };
+      // init line for axis
+      var line = d3.line()
+        .x(function(data) { return xScale(data[param.xColumn]); })
+        .y(function(data) { return (param.series[j].yAxis == "left") ? yScaleLeft(data[param.series[j].yColumn]) : yScaleRight(data[param.series[j].yColumn]); });
       // draw line
       g.append("path").datum(data)
         .attr("d", line)
