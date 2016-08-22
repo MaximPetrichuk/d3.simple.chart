@@ -9,7 +9,7 @@ Very small and easy library for quick creation of simple line charts on d3.js.
     d3.tsv("sample.tsv", function(error, data) {
       if (error) throw error;
       // parse date and numeric data before build chart
-      preParceDann("Date","%d.%m.%Y",["Metal month","Mined %"],data);
+      d3sPreParceDann("Date","%d.%m.%Y",["Metal month","Mined %"],data);
       ...
     }
 ```
