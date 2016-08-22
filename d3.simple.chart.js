@@ -29,8 +29,8 @@
 
 // build chart
 function d3sChart (param,data,dataGroup) //dataGroup - data after processing by d3.nest 
-// parse date and numeric data before build chart, sample: preParceDann("Date","%d.%m.%Y",["Metal month","Mined %"],data);
-function preParceDann(dateColumn,dateFormat,usedNumColumns,data) 
+// parse date and numeric data before build chart, sample: d3sPreParceDann("Date","%d.%m.%Y",["Metal month","Mined %"],data);
+function d3sPreParceDann(dateColumn,dateFormat,usedNumColumns,data) 
 */
 
 // build chart
@@ -202,8 +202,8 @@ function d3sChart (param,data,dataGroup){
   };
 };
 
-// parse date and numeric data before build chart, sample: preParceDann("Date","%d.%m.%Y",["Metal month","Mined %"],data);
-function preParceDann(dateColumn,dateFormat,usedNumColumns,data){
+// parse date and numeric data before build chart, sample: d3sPreParceDann("Date","%d.%m.%Y",["Metal month","Mined %"],data);
+function d3sPreParceDann(dateColumn,dateFormat,usedNumColumns,data){
   var parse = d3.timeParse(dateFormat);
   data.forEach(function(d) { 
     d[dateColumn] = parse(d[dateColumn]);
